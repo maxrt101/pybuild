@@ -7,12 +7,19 @@ To build included example C++ project run `./example.py`
 To run test run `./example.py test`  
 To run cppcheck run `./example.py cppcheck`  
 
+## About pybuild
+pybuild is a build tool for C++ projects.  
+Main feaures are:  
+ - Intuitive API for managing tasks, subtasks and dependencies
+ - Caching of last build time. Prevents from redundant rebuilds.
+ - A set of functions to perform common operations with C++ source/object files (compile, link into executables, shared or dynamic libraries)
+
 ## Example pybuild file
 Simplest pybuild file could look like this:  
 ```python
 #!/usr/bin/env python3
 
-from pybuild.config import format as cf
+from pybuild.config import format as cf # cf - config format, formats a string, replacing {} with corresponding config entry
 import pybuild
 
 @build.task()
@@ -49,11 +56,11 @@ def lib(ctx):
         output='libexample.a'
     )
 
-@pybuild.subtask('libff')
+@pybuild.subtask('lib')
 def core(ctx):
     pybuild.cpp.compile_batch(pybuild.utils.get_files(cf('{topdir}/src/core'), r'.+\.cc'), 'core')
 
-@pybuild.subtask('libff')
+@pybuild.subtask('lib')
 def utils(ctx):
     pybuild.cpp.compile_batch(pybuild.utils.get_files(cf('{topdir}/src/utils'), r'.+\.cc'), 'utils')
 
