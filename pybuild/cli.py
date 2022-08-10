@@ -15,7 +15,7 @@ options = {
 
 def usage():
     print(
-        f'ff/build v{VERSION}\n'
+        f'pybuild v{VERSION}\n'
         '\n'
         f'Usage: {sys.argv[0]} [OPTIONS] [TASK[:SUBTASK]]\n'
         '\n'
@@ -82,7 +82,7 @@ def parse_args():
     i = 1
     while i < len(sys.argv):
         if sys.argv[i] == '--version':
-            print(f'ff/build v{VERSION}')
+            print(f'pybuild v{VERSION}')
             sys.exit(0)
         elif sys.argv[i] in ['-h', '--help']:
             usage()
